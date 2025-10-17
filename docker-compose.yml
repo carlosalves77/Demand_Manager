@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_database
+    environment:
+      - POSTGRES_USER=${postgres_user}
+      - POSTGRES_PASSWORD=${postgres_password}
+      - POSTGRES_DB=${postgres_database}
+    ports:
+      - "5432:5432"
+    networks:
+      - internal
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  demand-manager:
+    build: .
+    image: demand-manager:latest
+    container_name: demand-manager
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${postgres_database}
+      - SPRING_DATASOURCE_USERNAME=${spring_user}
+      - SPRING_DATASOURCE_PASSWORD=${spring_password}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SERVER_PORT=4000
+      - SPRING_JPA_OPEN_IN_VIEW=false
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+    networks:
+      - internal
+    ports:
+      - "4000:4000"
+
+volumes:
+  postgres_data:
+
+networks:
+  internal:
+    external: true
