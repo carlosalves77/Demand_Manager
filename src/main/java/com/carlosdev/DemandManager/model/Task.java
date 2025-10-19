@@ -4,6 +4,7 @@ import com.carlosdev.DemandManager.util.PriorityType;
 import com.carlosdev.DemandManager.util.StatusType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
@@ -20,14 +21,18 @@ public class Task {
     @Size(min = 5, max = 150)
     private String title;
 
+    @NotBlank
     private String description;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private StatusType status;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private PriorityType priority;
 
+    @NotNull
     private LocalDate dueDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
