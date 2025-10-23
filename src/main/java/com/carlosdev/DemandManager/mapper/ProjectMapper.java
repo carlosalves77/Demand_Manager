@@ -4,8 +4,6 @@ import com.carlosdev.DemandManager.dto.request.ProjectRequestDTO;
 import com.carlosdev.DemandManager.dto.response.ProjectResponseDTO;
 import com.carlosdev.DemandManager.dto.response.TaskResponseDTO;
 import com.carlosdev.DemandManager.model.Project;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -15,7 +13,6 @@ import java.util.List;
 @Component
 public class ProjectMapper {
 
-    private static final Logger log = LoggerFactory.getLogger(ProjectMapper.class);
 
     public static ProjectResponseDTO toResponse(Project project) {
         if (project == null) {
