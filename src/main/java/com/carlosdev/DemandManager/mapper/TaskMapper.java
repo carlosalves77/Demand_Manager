@@ -3,11 +3,8 @@ package com.carlosdev.DemandManager.mapper;
 import com.carlosdev.DemandManager.dto.request.TaskRequestDTO;
 import com.carlosdev.DemandManager.dto.response.TaskResponseDTO;
 import com.carlosdev.DemandManager.model.Task;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 
 @Component
 public class TaskMapper {
