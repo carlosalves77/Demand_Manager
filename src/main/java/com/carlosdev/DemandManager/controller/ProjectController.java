@@ -3,6 +3,7 @@ package com.carlosdev.DemandManager.controller;
 import com.carlosdev.DemandManager.dto.request.ProjectRequestDTO;
 import com.carlosdev.DemandManager.dto.response.ProjectResponseDTO;
 import com.carlosdev.DemandManager.service.ProjectService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
+    @Operation(summary = "Lista de todos os projetos criados")
     @GetMapping
     public ResponseEntity<List<ProjectResponseDTO>> getAllProjects() {
         List<ProjectResponseDTO> projects = projectService.getAllProjects();
