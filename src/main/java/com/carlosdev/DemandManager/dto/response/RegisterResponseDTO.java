@@ -8,7 +8,6 @@ public record RegisterResponseDTO(
         String id,
         String email,
         String username,
-        Boolean is_verified,
         Instant created_at,
         RoleType role
 ) {
