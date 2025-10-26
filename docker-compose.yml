@@ -19,6 +19,8 @@ services:
     container_name: demand-manager
     depends_on:
       - postgres
+    env_file:
+      - .env
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${postgres_database}
       - SPRING_DATASOURCE_USERNAME=${spring_user}
