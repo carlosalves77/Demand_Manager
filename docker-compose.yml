@@ -14,7 +14,9 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   demand-manager:
-    build: .
+    build:
+      context: .
+      target: runner
     image: demand-manager:latest
     container_name: demand-manager
     depends_on:
@@ -29,10 +31,13 @@ services:
       - SERVER_PORT=4000
       - SPRING_JPA_OPEN_IN_VIEW=false
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      - JWT_SECRET=${JWT_SECRET}
+
     networks:
       - internal
     ports:
       - "4000:4000"
+
 
 volumes:
   postgres_data:
