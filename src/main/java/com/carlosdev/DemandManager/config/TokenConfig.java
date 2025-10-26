@@ -16,14 +16,13 @@ import java.util.UUID;
 public class TokenConfig {
 
     private final Algorithm algorithm;
-    private final String secret;
 
-    public TokenConfig(@Value("${JWT_SECRET}") String secret) {
-        if (secret == null || secret.isBlank()) {
+    public TokenConfig(@Value("${JWT_SECRET}") String apiKey) {
+
+        if (apiKey == null || apiKey.isBlank()) {
             throw new IllegalArgumentException("Segredo JWT (JWT_SECRET) não pode ser nulo ou vazio");
         }
-        this.secret = secret;
-        this.algorithm = Algorithm.HMAC256(secret);
+        this.algorithm = Algorithm.HMAC256(apiKey);
     }
 
     public String generateToken(UserAuth userAuth) {
