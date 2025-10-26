@@ -55,17 +55,17 @@ public class AuthService {
         userAuth.setPassword_hash(encodedPassword);
         userAuth.setIs_verified(false);
 
-        userAuthRepository.save(userAuth);
+        UserAuth savedUserAuth = userAuthRepository.save(userAuth);
 
-        VerificationToken verificationToken = new VerificationToken(userAuth);
+        VerificationToken verificationToken = new VerificationToken(savedUserAuth);
         verificationTokenRepository.save(verificationToken);
 
         String verificationLink =
                 "http://localhost:4000/auth/verify-account?token=" + verificationToken.getToken();
-        log.info("Simulação envio de e-mail para:{}", userAuth.getEmail());
+        log.info("Simulação envio de e-mail para:{}", savedUserAuth.getEmail());
         log.info("Link de verificação:{}", verificationLink);
 
-        return UserRegisterAuthMapper.toResponse(userAuth);
+        return UserRegisterAuthMapper.toResponse(savedUserAuth);
 
     }
 
